@@ -1,9 +1,9 @@
 import React from 'react';
 
-export const Card = () => {
+export const HomeContent = () => {
     return (
         <div>
-            
+
         </div>
     );
 };
