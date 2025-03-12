@@ -3,24 +3,27 @@ import { useEffect, useState } from 'react';
 import { Match } from '@/types';
 
 export const useGetMatches = () => {
-    const [error, setError] = useState<boolean | null>(null);
+    const [error, setError] = useState<boolean>(false);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [matches, setMatches] = useState<Match[]>();
+    const [matches, setMatches] = useState<Match[]>([]);
+
+    const getMatches = async () => {
+        try {
+            setIsLoading(true);
+            setError(false);
+            const allMatches = await getMatchesData();
+            setMatches(allMatches);
+        } catch (error) {
+            setError(true);
+            setMatches([]);
+        } finally {
+            setIsLoading(false);
+        }
+    }
 
     useEffect(() => {
-        const getMatches = async () => {
-            try {
-                setIsLoading(true);
-                const allMatches = await getMatchesData()
-                setMatches(allMatches)
-            } catch (error) {
-                setError(true)
-            } finally {
-                setIsLoading(false);
-            }
-        }
-        getMatches()
+        getMatches();
     }, [])
 
-    return { error, isLoading, matches }
+    return { error, isLoading, matches, getMatches }
 };

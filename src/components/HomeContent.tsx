@@ -1,20 +1,29 @@
-'use client'
+'use client';
 
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Card } from '@/components/Card';
-import { getMatchesData } from '@/api';
+import { ScoreBoard } from '@/components/ScoreBoard';
+import { Match } from '@/types';
 
-export const HomeContent = () => {
-    useEffect(() => {
-        const response = async () => {
-            const data = await getMatchesData()
-            console.log(data)
-        }
-        response()
-    }, []);
+type HomeContentProps = { matches: Match[] }
+
+export const HomeContent = ({matches}: HomeContentProps) => {
+
     return (
-        <div className='flex flex-col items-center justify-center gap-[12px]'>
-            <Card />
+        <div className="flex flex-col items-center justify-center gap-[12px]">
+            {matches.map((match) => (
+                <Card
+                    key={match.title}
+                    homeTeam={match.homeTeam.name}
+                    awayTeam={match.awayTeam.name}
+                >
+                    <ScoreBoard
+                        homeScore={match.homeScore}
+                        awayScore={match.awayScore}
+                        status={match.status}
+                    />
+                </Card>
+            ))}
         </div>
     );
 };
