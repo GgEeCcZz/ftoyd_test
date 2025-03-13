@@ -9,17 +9,17 @@ type CardProps = {
 
 export const Card = ({homeTeam, awayTeam, children}: CardProps) => {
     return (
-        <div className="w-full h-[87px] rounded-sm px-[36px] py-[16px] bg-gradient-to-r from-[#0F1318] to-[#0A0E12]">
-            <div className="flex justify-between items-center w-full h-[55px]">
-                <div className="flex items-center w-[173px] h-[48px] gap-[14px]">
+        <div className="w-full h-21.75 rounded-sm px-9 py-4 bg-gradient-to-r from-custom-light-gradient to-custom-dark-gradient">
+            <div className="flex justify-between items-center w-full h-13.75">
+                <div className="flex items-center w-43.25 h-12 gap-3.5">
                     <Image src="/team_logo.svg" alt="teamLogo" width={48} height={48}/>
                     <span
-                        className="w-[111px] h-[19px] font-semibold text-base leading-[100%] tracking-[0%]">{homeTeam}</span>
+                        className="w-27.75 h-4.75 font-semibold text-base leading-[100%] tracking-[0%]">{homeTeam}</span>
                 </div>
                 {children}
-                <div className="flex items-center w-[173px] h-[48px] gap-[14px]">
+                <div className="flex items-center w-43.25 h-12 gap-3.5">
                     <span
-                        className="w-[111px] h-[19px] font-semibold text-base leading-[100%] tracking-[0%]">{awayTeam}</span>
+                        className="w-27.75 h-4.75 font-semibold text-base leading-[100%] tracking-[0%]">{awayTeam}</span>
                     <Image src="/team_logo.svg" alt="teamLogo" width={48} height={48}/>
                 </div>
             </div>

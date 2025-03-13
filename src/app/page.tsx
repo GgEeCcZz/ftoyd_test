@@ -1,16 +1,20 @@
-'use client'
+import { Content } from '@/components/Content';
+import { getMatchesData } from '@/api';
+import { Match } from '@/types';
 
-import { Header } from '@/components/Header';
-import { HomeContent } from '@/components/HomeContent';
-import { useGetMatches } from '@/hooks/useGetMatches';
+export default async function Home() {
+    let matches: Match[] = [];
+    let error = false;
 
-export default function Home() {
-    const { error, isLoading, matches, getMatches } = useGetMatches();
+    try {
+        matches = await getMatchesData('fronttemp');
+    } catch (err) {
+        error = true;
+    }
 
     return (
-      <div>
-          <Header error={error} isLoading={isLoading} getMatches={getMatches}/>
-          <HomeContent matches={matches}/>
-      </div>
-  )
+        <div>
+            <Content initialMatches={matches} initialError={error} />
+        </div>
+    );
 }

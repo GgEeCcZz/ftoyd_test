@@ -1,16 +1,14 @@
-'use client';
-
 import React from 'react';
 import { Card } from '@/components/Card';
 import { ScoreBoard } from '@/components/ScoreBoard';
 import { Match } from '@/types';
 
-type HomeContentProps = { matches: Match[] }
+type MatchesListProps = { matches: Match[] }
 
-export const HomeContent = ({matches}: HomeContentProps) => {
+export const MatchesList = ({matches}: MatchesListProps) => {
 
     return (
-        <div className="flex flex-col items-center justify-center gap-[12px]">
+        <div className="flex flex-col items-center justify-center gap-3">
             {matches.map((match) => (
                 <Card
                     key={match.title}

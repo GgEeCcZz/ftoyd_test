@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
+@theme {
+  --color-custom-bright-red: #EB0237;
+  --color-custom-dark-red: #A01131;
+  --color-custom-darker-red: #701328;
+  --color-custom-bright-green: #43AD28;
+  --color-custom-orange: #EB6402;
+  --color-custom-light-gradient: #0F1318;
+  --color-custom-dark-gradient: #0A0E12;
+  --color-custom-error-bg: #0F1318;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

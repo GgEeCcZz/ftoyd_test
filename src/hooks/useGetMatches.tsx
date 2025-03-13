@@ -1,29 +1,25 @@
-import { getMatchesData } from '@/api';
-import { useEffect, useState } from 'react';
+'use client';
+import { useState, useCallback } from 'react';
 import { Match } from '@/types';
+import { getMatchesData } from '@/api';
 
-export const useGetMatches = () => {
-    const [error, setError] = useState<boolean>(false);
+export const useGetMatches = (initialMatches: Match[], initialError: boolean) => {
+    const [matches, setMatches] = useState<Match[]>(initialMatches);
+    const [error, setError] = useState<boolean>(initialError);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [matches, setMatches] = useState<Match[]>([]);
 
-    const getMatches = async () => {
+    const getMatches = useCallback(async () => {
+        setIsLoading(true);
         try {
-            setIsLoading(true);
+            const newMatches = await getMatchesData('fronttemp');
+            setMatches(newMatches);
             setError(false);
-            const allMatches = await getMatchesData();
-            setMatches(allMatches);
-        } catch (error) {
+        } catch (err) {
             setError(true);
-            setMatches([]);
         } finally {
             setIsLoading(false);
         }
-    }
+    }, []);
 
-    useEffect(() => {
-        getMatches();
-    }, [])
-
-    return { error, isLoading, matches, getMatches }
+    return { matches, error, isLoading, getMatches };
 };
